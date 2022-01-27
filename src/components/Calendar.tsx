@@ -20,14 +20,17 @@ const Calendar = () => {
 		for (let i = 0; i < 7; i++) {
 			formattedDate = dateFns.format(day, dateFormat);
 			days.push(
-				<div className="col" key={day.toDateString()}>
+				<div className="border-2 border-gray-300 pt-2 px-5 pb-12 md:flex-1" key={day.toDateString()}>
 					<span>{formattedDate}</span>
+					<p>7:00pm - Freaky Friday</p>
+					<p>7:00pm - Freaky Friday</p>
+					<p>7:00pm - Freaky Friday</p>
 				</div>
 			);
 			day = dateFns.addDays(day, 1);
 		}
 		rows.push(
-			<div className="row" key={day.toDateString()}>
+			<div className="w-100 lg:flex lg:flex-row lg:flex-wrap" key={day.toDateString()}>
 				{days}
 			</div>
 		);
@@ -35,7 +38,7 @@ const Calendar = () => {
 	}
 
 	return (
-		<div>
+		<div className="">
 			{rows}
 		</div>
 	);
