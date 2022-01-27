@@ -15,14 +15,14 @@ const ALL_SCREENINGS = gql`
 	}
 `;
 
-interface ScreeningDate {
+interface Date {
 	day: number
 }
 interface Screening {
 	id: string;
   title: string;
   time: string;
-	date: ScreeningDate;
+	date: Date;
 }
 
 const Calendar = () => {
@@ -31,8 +31,6 @@ const Calendar = () => {
 
 	if (result.loading)
     return <div>Loading...</div>
-
-	// console.log(result.data.allScreenings.map(s => s.title));
 
 	const monthStart = dateFns.startOfMonth(date);
 	const monthEnd = dateFns.endOfMonth(monthStart);
@@ -50,15 +48,21 @@ const Calendar = () => {
 		for (let i = 0; i < 7; i++) {
 			formattedDate = dateFns.format(day, dateFormat);
 			days.push(
-				<div className="border-2 border-gray-300 pt-2 px-5 pb-12 md:flex-1" key={day.toDateString()}>
-					<span>{formattedDate}</span>
+				<div 
+					className={`border-2 border-gray-300 border-b-0 pt-2 px-5 pb-12 md:flex-1 ${
+          !dateFns.isSameMonth(day, monthStart)
+            ? "bg-gray-200"
+            : dateFns.isSameDay(day, new Date()) ? "bg-red-300" : ""
+          }`}
+					key={day.toDateString()}>
+					<span className="font-bold">{formattedDate}</span>
 					{
 						dateFns.isSameMonth(day, monthStart) ? 
 						result.data.allScreenings
 							.filter((s: Screening) => s.date.day === Number(formattedDate))
 							.map((s: Screening) => (
 								<div key={s.id}>
-									{s.time} - {s.title}
+									{s.title.toUpperCase()} | {s.time}
 								</div>
 							)) : null
 					}
