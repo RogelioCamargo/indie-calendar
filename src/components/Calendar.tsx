@@ -1,8 +1,38 @@
 import React, { useState } from "react";
 import * as dateFns from "date-fns";
+import { gql, useQuery } from "@apollo/client";
+
+const ALL_SCREENINGS = gql`
+	query {
+		allScreenings {
+			id
+			title
+			time
+			date {
+				day
+			}
+		}
+	}
+`;
+
+interface ScreeningDate {
+	day: number
+}
+interface Screening {
+	id: string;
+  title: string;
+  time: string;
+	date: ScreeningDate;
+}
 
 const Calendar = () => {
 	const [date] = useState(new Date());
+	const result = useQuery(ALL_SCREENINGS);
+
+	if (result.loading)
+    return <div>Loading...</div>
+
+	// console.log(result.data.allScreenings.map(s => s.title));
 
 	const monthStart = dateFns.startOfMonth(date);
 	const monthEnd = dateFns.endOfMonth(monthStart);
@@ -22,9 +52,16 @@ const Calendar = () => {
 			days.push(
 				<div className="border-2 border-gray-300 pt-2 px-5 pb-12 md:flex-1" key={day.toDateString()}>
 					<span>{formattedDate}</span>
-					<p>7:00pm - Freaky Friday</p>
-					<p>7:00pm - Freaky Friday</p>
-					<p>7:00pm - Freaky Friday</p>
+					{
+						dateFns.isSameMonth(day, monthStart) ? 
+						result.data.allScreenings
+							.filter((s: Screening) => s.date.day === Number(formattedDate))
+							.map((s: Screening) => (
+								<div key={s.id}>
+									{s.time} - {s.title}
+								</div>
+							)) : null
+					}
 				</div>
 			);
 			day = dateFns.addDays(day, 1);
