@@ -1,10 +1,12 @@
 import React from "react";
 import "./App.css";
+import Calendar from "./Calendar";
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <h1>Indie Theater Screenings</h1>
+			<Calendar />
     </div>
   );
 }
