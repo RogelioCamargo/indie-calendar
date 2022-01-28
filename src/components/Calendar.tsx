@@ -42,6 +42,7 @@ const Calendar = () => {
 
 	let days = [];
 	let day = startDate;
+	const month = dateFns.format(new Date(), "MMMM");
 	let formattedDate = "";
 
 	while (day <= endDate) {
@@ -49,10 +50,10 @@ const Calendar = () => {
 			formattedDate = dateFns.format(day, dateFormat);
 			days.push(
 				<div 
-					className={`border-2 border-gray-300 border-b-0 pt-2 px-5 pb-12 md:flex-1 ${
+					className={`border-2 border-gray-200 border-b-0 lg:border-r-0 pt-2 px-5 pb-12 md:flex-1 ${
           !dateFns.isSameMonth(day, monthStart)
-            ? "bg-gray-200"
-            : dateFns.isSameDay(day, new Date()) ? "bg-red-300" : ""
+            ? "bg-gray-100"
+            : dateFns.isSameDay(day, new Date()) ? "bg-red-400" : ""
           }`}
 					key={day.toDateString()}>
 					<span className="font-bold">{formattedDate}</span>
@@ -79,7 +80,8 @@ const Calendar = () => {
 	}
 
 	return (
-		<div className="">
+		<div className="m-5">
+			<h2 className="text-3xl lg:text-4xl font-bold mb-5">{month}</h2>
 			{rows}
 		</div>
 	);

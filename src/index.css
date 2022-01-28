@@ -17,3 +17,7 @@ html {
 div, p, span {
 	font-size: 1.4rem;
 }
+
+h1 {
+	font-family: 'Limelight', cursive;
+}
