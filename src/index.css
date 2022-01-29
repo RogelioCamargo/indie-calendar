@@ -8,16 +8,6 @@
 	box-sizing: border-box;
 }
 
-/* Typography */
-html {
-	font-family: 'Work Sans', sans-serif;
-	font-size: 10px;
-}
-
-div, p, span {
-	font-size: 1.4rem;
-}
-
 h1 {
 	font-family: 'Limelight', cursive;
 }
