@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import * as dateFns from "date-fns";
 import { useQuery } from "@apollo/client";
-import { ALL_SCREENINGS } from "../graphql/queries";
-import { Screening } from "../types";
-import { getClassesForDayContainer, getDayName, getDayOfTheMonth, getMonth } from "../utils";
+import { ALL_SCREENINGS } from "../../graphql/queries";
+import { Screening } from "../../types";
+import { getClassesForDayContainer, getDayOfTheMonth, getMonth } from "./utils";
+import Week from "./Week";
+import CalendarHeader from "./CalendarHeader";
 
 const Calendar = () => {
 	const [date] = useState(new Date());
@@ -40,37 +42,7 @@ const Calendar = () => {
 		</div>
 	);
 
-	const DayName = ({ name }: { name: string }) => (
-		<div className="border border-gray-200 md:flex-1 py-2 font-bold">
-			{name}
-		</div>
-	);
-	
-	const DayNameWeek = ({ children }: { children: Array<JSX.Element>}) => (
-		<div className="hidden w-full lg:flex">
-			{children}
-		</div>
-	);
-
-	const Week = ({ day, children }: { day: Date, children: Array<JSX.Element>}) => (
-		<div className="w-full lg:flex lg:flex-row lg:flex-wrap">
-			{children}
-		</div>
-	);
-
-	// get days of the week
-	const daysOfWeek = [];
-	for (let i = 0; i < 7; i++) {
-		daysOfWeek.push(
-			<DayName name={getDayName(startDate, i)} key={i}/>
-		);
-	}
-
-	rows.push(
-		<DayNameWeek key={"WeekNames"}>
-			{daysOfWeek}
-		</DayNameWeek>
-	);
+	rows.push(<CalendarHeader date={startDate}/>);
 
 	while (day <= endDate) {
 		for (let i = 0; i < 7; i++) {
@@ -78,7 +50,7 @@ const Calendar = () => {
 			day = dateFns.addDays(day, 1);
 		}
 		rows.push(
-			<Week day={day} key={day.toDateString()}>
+			<Week key={day.toDateString()}>
 				{days}
 			</Week>
 		);
