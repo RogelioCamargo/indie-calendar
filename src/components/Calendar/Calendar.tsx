@@ -19,22 +19,19 @@ const Calendar = () => {
 	const monthEnd = dateFns.endOfMonth(monthStart);
 	const startDate = dateFns.startOfWeek(monthStart);
 	const endDate = dateFns.endOfWeek(monthEnd);
-
-	const rows = [];
-
-	let days = [];
-	let day = startDate;
 	const month = getMonth();
-
+	let day = startDate;
+	
+	const rows = [];
+	let days = [];
+	
 	// create header listing all day of the week names
 	rows.push(<CalendarHeader date={startDate} key={"CalendarHeader"} />);
 
 	while (day <= endDate) {
 		for (let i = 0; i < 7; i++) {
 			const screenings = result.data.allScreenings.filter(
-				(screening: Screening) => (
-					screening.date.day === Number(getDayOfTheMonth(day))
-				)
+				(screening: Screening) => screening.date.day === Number(getDayOfTheMonth(day))
 			);
 			days.push(
 				<Day 
