@@ -1,29 +1,8 @@
 import React, { useState } from "react";
 import * as dateFns from "date-fns";
-import { gql, useQuery } from "@apollo/client";
-
-const ALL_SCREENINGS = gql`
-	query {
-		allScreenings {
-			id
-			title
-			time
-			date {
-				day
-			}
-		}
-	}
-`;
-
-interface Date {
-	day: number
-}
-interface Screening {
-	id: string;
-  title: string;
-  time: string;
-	date: Date;
-}
+import { useQuery } from "@apollo/client";
+import { ALL_SCREENINGS } from "../graphql/queries";
+import { Screening } from "../types";
 
 const Calendar = () => {
 	const [date] = useState(new Date());
