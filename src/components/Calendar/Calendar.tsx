@@ -3,10 +3,10 @@ import * as dateFns from "date-fns";
 import { useQuery } from "@apollo/client";
 import { ALL_SCREENINGS } from "../../graphql/queries";
 import { Screening } from "../../types";
-import { getClassesForDayContainer, getDayOfTheMonth, getMonth, getNextDay, isSameMonth } from "./utils";
+import { getDayOfTheMonth, getMonth, getNextDay } from "./utils";
 import Week from "./Week";
 import CalendarHeader from "./CalendarHeader";
-import ScreeningPreview from "./ScreeningPreview";
+import Day from "./Day";
 
 const Calendar = () => {
 	const [date] = useState(new Date());
@@ -26,29 +26,23 @@ const Calendar = () => {
 	let day = startDate;
 	const month = getMonth();
 
-	const Day = ({ day }: { day: Date }) => {
-		const dayOfTheMonth = getDayOfTheMonth(day);
-		return (
-			<div className={`border border-gray-200 pt-2 px-5 pb-5 md:flex-1 ${getClassesForDayContainer(day, monthStart)}`}>
-				<span className="block font-bold mb-3">{dayOfTheMonth}</span>
-				{
-					isSameMonth(day, monthStart) &&
-					result.data.allScreenings
-						.filter((screening: Screening) => screening.date.day === Number(dayOfTheMonth))
-						.map((screening: Screening) => (
-							<ScreeningPreview screening={screening} day={day} key={screening.id} />
-						))
-				}
-			</div>
-		);
-	};
-
+	// create header listing all day of the week names
 	rows.push(<CalendarHeader date={startDate} key={"CalendarHeader"} />);
 
 	while (day <= endDate) {
 		for (let i = 0; i < 7; i++) {
+			const screenings = result.data.allScreenings.filter(
+				(screening: Screening) => (
+					screening.date.day === Number(getDayOfTheMonth(day))
+				)
+			);
 			days.push(
-				<Day day={day} key={day.toDateString()} />
+				<Day 
+					day={day} 
+					key={day.toDateString()} 
+					screenings={screenings} 
+					monthStart={monthStart}
+				/>
 			);
 			day = getNextDay(day);
 		}
