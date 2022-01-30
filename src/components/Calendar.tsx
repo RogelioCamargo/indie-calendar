@@ -3,6 +3,7 @@ import * as dateFns from "date-fns";
 import { useQuery } from "@apollo/client";
 import { ALL_SCREENINGS } from "../graphql/queries";
 import { Screening } from "../types";
+import { getClassesForDayContainer, getDayName, getDayOfTheMonth, getMonth } from "../utils";
 
 const Calendar = () => {
 	const [date] = useState(new Date());
@@ -16,38 +17,31 @@ const Calendar = () => {
 	const startDate = dateFns.startOfWeek(monthStart);
 	const endDate = dateFns.endOfWeek(monthEnd);
 
-	const dateFormat = "d";
 	const rows = [];
 
 	let days = [];
 	let day = startDate;
-	const month = dateFns.format(new Date(), "MMMM");
-	let formattedDate = "";
+	const month = getMonth();
 
-	const Day = ({ day, date }: { day: Date, date: string }) => (
+	const Day = ({ day, dayOfTheMonth }: { day: Date, dayOfTheMonth: string }) => (
 		<div 
-			className={`border border-gray-200 pt-2 px-5 pb-5 md:flex-1 ${
-			!dateFns.isSameMonth(day, monthStart)
-				? "bg-gray-100"
-				: dateFns.isSameDay(day, new Date()) ? "pb-12 bg-red-500 text-white" : ""
-			}`}
-			key={day.toDateString()}>
-			<span className="block font-bold mb-3">{date}</span>
+			className={`border border-gray-200 pt-2 px-5 pb-5 md:flex-1 ${getClassesForDayContainer(day, monthStart)}`}>
+			<span className="block font-bold mb-3">{dayOfTheMonth}</span>
 			{
-				dateFns.isSameMonth(day, monthStart) ? 
+				dateFns.isSameMonth(day, monthStart) &&
 				result.data.allScreenings
-					.filter((s: Screening) => s.date.day === Number(date))
-					.map((s: Screening) => (
-						<div key={s.id} className={`text-sm mb-2 lg:text-xs cursor-pointer ${dateFns.isSameDay(day, new Date()) ? "hover:text-black" : "hover:text-red-500"}`}>
-							{s.title.toUpperCase()} | {s.time}
+					.filter((screening: Screening) => screening.date.day === Number(dayOfTheMonth))
+					.map((screening: Screening) => (
+						<div key={screening.id} className={`text-sm mb-2 lg:text-xs cursor-pointer ${dateFns.isSameDay(day, new Date()) ? "hover:text-black" : "hover:text-red-500"}`}>
+							{screening.title.toUpperCase()} | {screening.time}
 						</div>
-					)) : null
+					))
 			}
 		</div>
 	);
 
 	const DayName = ({ name }: { name: string }) => (
-		<div className="border border-gray-200 md:flex-1 py-2 font-bold" key={name}>
+		<div className="border border-gray-200 md:flex-1 py-2 font-bold">
 			{name}
 		</div>
 	);
@@ -59,7 +53,7 @@ const Calendar = () => {
 	);
 
 	const Week = ({ day, children }: { day: Date, children: Array<JSX.Element>}) => (
-		<div className="w-full lg:flex lg:flex-row lg:flex-wrap" key={day.toDateString()}>
+		<div className="w-full lg:flex lg:flex-row lg:flex-wrap">
 			{children}
 		</div>
 	);
@@ -68,24 +62,23 @@ const Calendar = () => {
 	const daysOfWeek = [];
 	for (let i = 0; i < 7; i++) {
 		daysOfWeek.push(
-			<DayName name={dateFns.format(dateFns.addDays(startDate, i), "iiii")}/>
+			<DayName name={getDayName(startDate, i)} key={i}/>
 		);
 	}
 
 	rows.push(
-		<DayNameWeek>
+		<DayNameWeek key={"WeekNames"}>
 			{daysOfWeek}
 		</DayNameWeek>
 	);
 
 	while (day <= endDate) {
 		for (let i = 0; i < 7; i++) {
-			formattedDate = dateFns.format(day, dateFormat);
-			days.push(<Day day={day} date={formattedDate} />);
+			days.push(<Day day={day} dayOfTheMonth={getDayOfTheMonth(day)} key={day.toDateString()} />);
 			day = dateFns.addDays(day, 1);
 		}
 		rows.push(
-			<Week day={day}>
+			<Week day={day} key={day.toDateString()}>
 				{days}
 			</Week>
 		);
