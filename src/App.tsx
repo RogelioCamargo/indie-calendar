@@ -7,10 +7,10 @@ import Showtimes from "./components/Showtimes";
 const App = () => {
   return (
     <div className="App">
-			<div className="bg-black py-10">
+			<div className="bg-black py-10 header-background">
 				<Link to="/">
-					<h1 className="text-3xl text-white lg:text-4xl font-bold tracking-wide">
-						Indie Theater Screenings
+					<h1 className="text-3xl text-white lg:text-5xl font-bold tracking-wide">
+						LA Indie Theater Calendar
 					</h1>
 				</Link>
 			</div>
