@@ -22,8 +22,16 @@ const Showtimes = () => {
 							{/* Title */}
 							<h2 className="font-bold text-xl mt-3 md:mt-0">{screening.title.toUpperCase()}</h2>
 							<div className="flex text-white text-center my-2">
-								<div className="bg-red-500 w-32 px-4 py-2 mr-3">View Trailer</div>
-								<div className="bg-black w-32 px-4 py-2">Buy Tickets</div>
+								<a href={screening.links.trailer} target="_blank" rel="noopener noreferrer">
+									<div className="bg-red-500 w-32 px-4 py-2 mr-3">
+											View Trailer
+									</div>
+								</a>
+								<a href={screening.links.info} target="_blank" rel="noopener noreferrer">
+									<div className="bg-black w-32 px-4 py-2">
+										Buy Tickets
+									</div>
+								</a>
 							</div>
 							{/* Description */}
 							<p className="leading-6">{screening.description}</p>

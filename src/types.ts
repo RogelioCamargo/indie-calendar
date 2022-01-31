@@ -18,7 +18,7 @@ export interface ScreeningFull {
 	title: string,
 	director: string,
 	time: string,
-	link: Links,
+	links: Links,
 	poster: string,
 	description: string,
 	date: Date,
