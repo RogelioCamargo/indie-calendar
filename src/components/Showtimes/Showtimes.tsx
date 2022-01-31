@@ -14,7 +14,7 @@ const Showtimes = () => {
 	return (
 		<div className="text-left mt-16">
 			{result.data.findScreeningsByDate.map((screening: ScreeningFull) => (
-				<div key={screening.id}>
+				<div key={screening.id} id={screening.id}>
 					<div className="px-7 mb-7 md:mb-12 md:flex md:max-w-7xl md:mx-auto">
 						<img className="block w-full h-full bg-gray-300 md:max-w-sm md:mr-5" src={screening.poster} alt={`Screening Poster for ${screening.title}`} />
 						{/* Details */}

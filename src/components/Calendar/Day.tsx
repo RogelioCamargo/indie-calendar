@@ -10,15 +10,17 @@ const Day = ({ day, screenings, monthStart }: { day: Date, screenings: Array<Scr
 		<div className={`border border-gray-200 pt-2 px-3 pb-5 md:flex-1 ${getClassesForDayContainer(day, monthStart)}`}>
 			{
 				isSameMonth(day, monthStart) ?
-				<Link to={`/showtimes/${dayOfTheMonth}`}>
-					<span className="block font-bold mb-3">{dayOfTheMonth}</span>
+				<>
+					<Link to={`/showtimes/${dayOfTheMonth}`}>
+						<span className="block font-bold mb-3">{dayOfTheMonth}</span>
+					</Link> 
 					{
 						screenings.map(
 							(screening: Screening) => (
 								<ScreeningPreview screening={screening} day={day} key={screening.id} />
 							))
 					}
-				</Link> :
+				</> :
 				<span className="block font-bold mb-3">{dayOfTheMonth}</span>
 			}
 		</div>
