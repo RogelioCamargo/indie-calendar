@@ -1,3 +1,3 @@
-## Want to support small indenpenent theaters?
+## Want to support small indenpenent theaters in Los Angeles?
 
-Check out all the films these theaters have set up for you!
+Check out my website and find the movie you like!
