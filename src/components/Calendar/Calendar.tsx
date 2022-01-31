@@ -52,7 +52,7 @@ const Calendar = () => {
 	}
 
 	return (
-		<div className="m-5">
+		<div className="px-5 mt-8 lg:max-w-screen-2xl lg:mx-auto">
 			<h2 className="text-2xl lg:text-3xl font-bold mb-5">
 				{month}
 			</h2>

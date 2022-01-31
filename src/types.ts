@@ -8,3 +8,20 @@ export interface Screening {
   time: string;
 	date: Date;
 }
+
+export interface Links {
+	trailer: string,
+	info: string
+}
+export interface ScreeningFull {
+	id: string, 
+	title: string,
+	director: string,
+	time: string,
+	link: Links,
+	poster: string,
+	description: string,
+	date: Date,
+	location: string,
+	isDoubleFeature: boolean
+}
