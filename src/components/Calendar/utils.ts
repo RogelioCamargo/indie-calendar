@@ -28,3 +28,9 @@ export const getClassesForDayContainer = (day: Date, monthStart: Date): string =
 export const getClassesForScreeningPreview = (day: Date): string => {
 	return dateFns.isSameDay(day, new Date()) ? "hover:text-black" : "hover:text-red-500";
 }
+
+export const formatDate = (day: string) => {
+	const newDate = new Date();
+	return dateFns.format(newDate, "MMMM") + " " + 
+	day + ", " + dateFns.format(newDate, "yyyy");
+}

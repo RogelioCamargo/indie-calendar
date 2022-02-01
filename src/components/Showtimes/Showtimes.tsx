@@ -5,6 +5,7 @@ import { ScreeningFull } from "../../types";
 import { FIND_SCREENINGS_BY_DAY } from "../../graphql/queries";
 import Loading from "../Loading";
 import ServerError from "../Error";
+import { formatDate } from "../Calendar/utils";
 
 const Showtimes = () => {
 	const params = useParams();
@@ -23,7 +24,10 @@ const Showtimes = () => {
 	screenings = [...morningScreenings, ...eveningScreenings];
 
 	return (
-		<div className="text-left mt-16">
+		<div className="text-left mt-5">
+			<h2 className="sticky top-0 lg:text-2xl bg-white font-bold py-5 text-center md:mt-5">
+				{params.day && formatDate(params.day)}
+			</h2>
 			{screenings.map((screening: ScreeningFull) => (
 				<div key={screening.id} id={screening.id}>
 					<div className="px-7 mb-7 md:mb-12 md:flex md:max-w-7xl md:mx-auto">
@@ -31,7 +35,7 @@ const Showtimes = () => {
 						{/* Details */}
 						<div className="text-sm md:text-base">
 							{/* Title */}
-							<h2 className="font-bold text-xl mt-3 md:mt-0">{screening.title.toUpperCase()}</h2>
+							<h3 className="font-bold text-xl mt-3 md:mt-0">{screening.title.toUpperCase()}</h3>
 							<div className="flex text-white text-center my-2">
 								{
 									screening.links.trailer && 
@@ -50,14 +54,14 @@ const Showtimes = () => {
 							{/* Description */}
 							<p className="leading-6">{screening.description}</p>
 							<div className="mt-3">
-								<h3 className="font-bold">Time</h3>
+								<h4 className="font-bold">Time</h4>
 								<p>{screening.time}</p>
-								<h3 className="font-bold mt-2">Location</h3>
+								<h4 className="font-bold mt-2">Location</h4>
 								<p>{screening.location.toUpperCase()}</p>
 								{
 									screening.director && 
 									<>
-										<h3 className="font-bold mt-2">Director</h3>
+										<h4 className="font-bold mt-2">Director</h4>
 										<p>{screening.director.toUpperCase()}</p>	
 									</>
 								}
