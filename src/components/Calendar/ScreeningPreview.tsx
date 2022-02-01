@@ -8,7 +8,7 @@ const ScreeningPreview = ({ screening, day }: { screening: Screening, day: Date 
 	>
 		<HashLink 
 			to={`/showtimes/${getDayOfTheMonth(day)}#${screening.id}`}
-			scroll={(el) => el.scrollIntoView({ behavior: "auto", block: "start" })}>
+			scroll={(el) => el.scrollIntoView({ behavior: "auto", block: "center" })}>
 			<span className="block font-bold mb-px">{screening.time.toUpperCase()}</span>
 			<span className="block">{screening.title.toUpperCase()}</span>
 		</HashLink>
