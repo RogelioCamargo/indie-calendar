@@ -8,6 +8,7 @@ import Week from "./Week";
 import CalendarHeader from "./CalendarHeader";
 import Day from "./Day";
 import Loading from "../Loading";
+import ServerError from "../Error";
 
 const Calendar = () => {
 	const [date] = useState(new Date());
@@ -15,6 +16,9 @@ const Calendar = () => {
 
 	if (result.loading)
     return <Loading />
+
+	if (result.error)
+		return <ServerError />
 
 	const monthStart = dateFns.startOfMonth(date);
 	const monthEnd = dateFns.endOfMonth(monthStart);
