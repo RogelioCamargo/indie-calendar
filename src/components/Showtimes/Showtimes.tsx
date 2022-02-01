@@ -4,6 +4,7 @@ import { useQuery } from "@apollo/client";
 import { ScreeningFull } from "../../types";
 import { FIND_SCREENINGS_BY_DAY } from "../../graphql/queries";
 import Loading from "../Loading";
+import ServerError from "../Error";
 
 const Showtimes = () => {
 	const params = useParams();
@@ -12,6 +13,9 @@ const Showtimes = () => {
 	if (result.loading) 
 		return <Loading />
 
+	if (result.error)
+		return <ServerError />
+		
 	return (
 		<div className="text-left mt-16">
 			{result.data.findScreeningsByDate.map((screening: ScreeningFull) => (
