@@ -30,9 +30,13 @@ const Calendar = () => {
 
 	while (day <= endDate) {
 		for (let i = 0; i < 7; i++) {
-			const screenings = result.data.allScreenings.filter(
+			let screenings = result.data.allScreenings.filter(
 				(screening: Screening) => screening.date.day === Number(getDayOfTheMonth(day))
 			);
+			const morningScreenings = screenings.filter((screening: Screening) => screening.time.toUpperCase().includes("AM"));
+			const eveningScreenings = screenings.filter((screening: Screening) => screening.time.toUpperCase().includes("PM"));
+			eveningScreenings.sort((a: Screening, b: Screening) => Number(a.time.replace(/[^0-9]/g, "")) - Number(b.time.replace(/[^0-9]/g, "")));
+			screenings = [...morningScreenings, ...eveningScreenings];
 			days.push(
 				<Day 
 					day={day} 
