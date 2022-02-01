@@ -15,10 +15,16 @@ const Showtimes = () => {
 
 	if (result.error)
 		return <ServerError />
-		
+
+	let screenings = result.data.findScreeningsByDate;
+	const morningScreenings = screenings.filter((screening: ScreeningFull) => screening.time.toUpperCase().includes("AM"));
+	const eveningScreenings = screenings.filter((screening: ScreeningFull) => screening.time.toUpperCase().includes("PM"));
+	eveningScreenings.sort((a: ScreeningFull, b: ScreeningFull) => Number(a.time.replace(/[^0-9]/g, "")) - Number(b.time.replace(/[^0-9]/g, "")));
+	screenings = [...morningScreenings, ...eveningScreenings];
+
 	return (
 		<div className="text-left mt-16">
-			{result.data.findScreeningsByDate.map((screening: ScreeningFull) => (
+			{screenings.map((screening: ScreeningFull) => (
 				<div key={screening.id} id={screening.id}>
 					<div className="px-7 mb-7 md:mb-12 md:flex md:max-w-7xl md:mx-auto">
 						<img className="block w-full h-full bg-gray-300 md:max-w-sm md:mr-5" src={screening.poster} alt={`Screening Poster for ${screening.title}`} />
