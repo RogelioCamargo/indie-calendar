@@ -20,7 +20,7 @@ const App = () => {
 			</Routes>
 			<div className="bg-black text-white py-10 mt-16 text-sm">
 				<span className="block mb-1">INDIE THEATER SCREENINGS</span>
-				<span className="block text-xs">ALL DATA WAS SCRAPED FROM THESE THEATERS WEBSITES</span>
+				<span className="block text-xs text-red-500">ALL DATA WAS SCRAPED FROM THEATER&apos;S WEBSITE</span>
 			</div>
     </div>
   );
