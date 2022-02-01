@@ -3,13 +3,14 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { ScreeningFull } from "../../types";
 import { FIND_SCREENINGS_BY_DAY } from "../../graphql/queries";
+import Loading from "../Loading";
 
 const Showtimes = () => {
 	const params = useParams();
 	const result = useQuery(FIND_SCREENINGS_BY_DAY, { variables: { day: Number(params.day) } });
 
 	if (result.loading) 
-		return <div>Loading...</div>;
+		return <Loading />
 
 	return (
 		<div className="text-left mt-16">

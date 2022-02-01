@@ -7,13 +7,14 @@ import { getDayOfTheMonth, getMonth, getNextDay } from "./utils";
 import Week from "./Week";
 import CalendarHeader from "./CalendarHeader";
 import Day from "./Day";
+import Loading from "../Loading";
 
 const Calendar = () => {
 	const [date] = useState(new Date());
 	const result = useQuery(ALL_SCREENINGS);
 
 	if (result.loading)
-    return <div>Loading...</div>
+    return <Loading />
 
 	const monthStart = dateFns.startOfMonth(date);
 	const monthEnd = dateFns.endOfMonth(monthStart);
