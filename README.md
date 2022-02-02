@@ -1,3 +1,12 @@
-## Want to support small indenpenent theaters in Los Angeles?
+## LAFILM
 
-Check out my website and find the movie you like!
+A calendar app which lists films from various small and independent movie theaters in Los Angles, CA!
+### Demo
+https://cinema-calendar.herokuapp.com/
+
+Technologies and services: 
+1. Typescript
+2. React
+3. GraphQL
+4. MongoDB and mongoose
+5. Tailwind CSS
