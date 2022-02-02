@@ -15,7 +15,7 @@ const Header = () => {
 						Calendar
 					</span>
 				</Link>
-				<Link to="/">
+				<Link to="/about">
 					<span className="ml-5 md:text-lg">
 						About
 					</span>
