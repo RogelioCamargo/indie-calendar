@@ -61,8 +61,8 @@ const Calendar = () => {
 	}
 
 	return (
-		<div className="px-5 lg:mt-5 lg:max-w-screen-2xl lg:mx-auto">
-			<h2 className="text-2xl lg:text-3xl font-bold py-5 bg-white sticky top-0">
+		<div className="px-5 -mt-3 lg:max-w-screen-2xl lg:mx-auto">
+			<h2 className="text-xl mb-3 lg:text-3xl font-bold py-3 bg-white sticky top-0">
 				{month}
 			</h2>
 			<div className="border border-gray-200">

@@ -1,27 +1,20 @@
 import React from "react";
 import "./App.css";
 import Calendar from "./components/Calendar";
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Showtimes from "./components/Showtimes";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
     <div className="App">
-			<div className="bg-black py-10 header-background">
-				<Link to="/">
-					<h1 className="text-3xl text-white lg:text-5xl font-bold tracking-wide">
-						LA Indie Theater Calendar
-					</h1>
-				</Link>
-			</div>
+			<Header />
 			<Routes>
 				<Route path="/" element={<Calendar />} />
 				<Route path="showtimes/:day" element={<Showtimes />} />
 			</Routes>
-			<div className="bg-black text-white py-10 mt-16 text-sm">
-				<span className="block mb-1">INDIE THEATER SCREENINGS</span>
-				<span className="block text-xs text-red-500">ALL DATA WAS SCRAPED FROM THEATER&apos;S WEBSITE</span>
-			</div>
+			<Footer />
     </div>
   );
 }

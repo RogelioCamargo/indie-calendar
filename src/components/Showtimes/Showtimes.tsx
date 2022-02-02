@@ -24,8 +24,8 @@ const Showtimes = () => {
 	screenings = [...morningScreenings, ...eveningScreenings];
 
 	return (
-		<div className="text-left mt-5">
-			<h2 className="sticky top-0 lg:text-2xl bg-white font-bold py-5 text-center md:mt-5">
+		<div className="text-left">
+			<h2 className="sticky top-0 lg:text-2xl bg-white font-bold -mt-3 mb-5 py-3 text-center">
 				{params.day && formatDate(params.day)}
 			</h2>
 			{screenings.map((screening: ScreeningFull) => (
