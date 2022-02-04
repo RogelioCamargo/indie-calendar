@@ -4,10 +4,6 @@ export const getMonth = (): string => {
 	return dateFns.format(new Date(), "MMMM");
 };
 
-export const getDayName = (day: Date, incrementor: number): string => {
-	return dateFns.format(dateFns.addDays(day, incrementor), "iiii");
-};
-
 export const getNextDay = (day: Date): Date => {
 	return dateFns.addDays(day, 1);
 };
