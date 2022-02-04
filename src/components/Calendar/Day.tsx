@@ -7,23 +7,25 @@ import { getClassesForDayContainer, getDayOfTheMonth, isSameMonth } from "./util
 const Day = ({ day, screenings, monthStart }: { day: Date, screenings: Array<Screening>, monthStart: Date }) => {
 	const dayOfTheMonth = getDayOfTheMonth(day);
 	return (
-		<div className={`border border-gray-200 pt-2 px-3 pb-5 md:flex-1 ${getClassesForDayContainer(day, monthStart)}`}>
+		<td className={`border border-gray-200 pt-2 px-3 pb-5 md:flex-1 ${getClassesForDayContainer(day, monthStart)}`}>
 			{
 				isSameMonth(day, monthStart) ?
 				<>
 					<Link to={`/showtimes/${dayOfTheMonth}`}>
 						<span className="block font-bold mb-3">{dayOfTheMonth}</span>
 					</Link> 
-					{
-						screenings.map(
-							(screening: Screening) => (
-								<ScreeningPreview screening={screening} day={day} key={screening.id} />
-							))
-					}
+					<ul>
+						{
+							screenings.map(
+								(screening: Screening) => (
+									<ScreeningPreview screening={screening} day={day} key={screening.id} />
+								))
+						}
+					</ul>
 				</> :
 				<span className="block font-bold mb-3">{dayOfTheMonth}</span>
 			}
-		</div>
+		</td>
 	);
 };
 

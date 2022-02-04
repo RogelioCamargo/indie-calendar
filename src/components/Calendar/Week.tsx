@@ -1,9 +1,9 @@
 import React from "react";
 
 const Week = ({ children }: { children: Array<JSX.Element>}) => (
-	<div className="w-full lg:flex lg:flex-row lg:flex-wrap">
+	<tr className="w-full lg:flex lg:flex-row lg:flex-wrap">
 		{children}
-	</div>
+	</tr>
 );
 
 export default Week;

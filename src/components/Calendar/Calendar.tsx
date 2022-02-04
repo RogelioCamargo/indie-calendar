@@ -29,9 +29,6 @@ const Calendar = () => {
 	
 	const rows = [];
 	let days = [];
-	
-	// create header listing all day of the week names
-	rows.push(<CalendarHeader key={"CalendarHeader"} />);
 
 	while (day <= endDate) {
 		for (let i = 0; i < 7; i++) {
@@ -65,9 +62,14 @@ const Calendar = () => {
 			<h2 className="text-xl mb-3 font-bold py-3 bg-white sticky top-0 lg:text-3xl">
 				{month}
 			</h2>
-			<div className="border border-gray-200">
-				{rows}
-			</div>
+			<table className="border border-gray-200">
+				<thead>
+					<CalendarHeader />
+				</thead>
+				<tbody>
+					{rows}
+				</tbody>
+			</table>
 		</div>
 	);
 };
