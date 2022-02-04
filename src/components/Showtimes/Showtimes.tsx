@@ -12,10 +12,10 @@ const Showtimes = () => {
 	const result = useQuery(FIND_SCREENINGS_BY_DAY, { variables: { day: Number(params.day) } });
 
 	if (result.loading) 
-		return <Loading />
+		return <Loading />;
 
 	if (result.error)
-		return <ServerError />
+		return <ServerError />;
 
 	let screenings = result.data.findScreeningsByDate;
 	const morningScreenings = screenings.filter((screening: ScreeningFull) => screening.time.toUpperCase().includes("AM"));

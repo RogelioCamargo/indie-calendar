@@ -15,10 +15,10 @@ const Calendar = () => {
 	const result = useQuery(ALL_SCREENINGS);
 
 	if (result.loading)
-    return <Loading />
+    return <Loading />;
 
 	if (result.error)
-		return <ServerError />
+		return <ServerError />;
 
 	const monthStart = dateFns.startOfMonth(date);
 	const monthEnd = dateFns.endOfMonth(monthStart);

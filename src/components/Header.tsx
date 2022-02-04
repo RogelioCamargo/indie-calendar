@@ -22,7 +22,7 @@ const Header = () => {
 				</Link>
 			</nav>
 		</div>
-	)
+	);
 };
 
 export default Header;

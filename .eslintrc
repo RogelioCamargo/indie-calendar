@@ -28,6 +28,7 @@
 			{
 				"allowTemplateLiterals": true
 			}
-		]
+		],
+		"semi": [2, "always"]
 	}
 }
