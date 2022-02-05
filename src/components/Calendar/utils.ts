@@ -1,5 +1,5 @@
 import * as dateFns from "date-fns";
-import { Screening, ScreeningFull } from "../../types";
+import { Screening } from "../../types";
 
 export const getMonth = (): string => {
 	return dateFns.format(new Date(), "MMMM");
