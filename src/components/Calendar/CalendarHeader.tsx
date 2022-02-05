@@ -12,16 +12,18 @@ const CalendarHeader = () => {
 	];
 
 	return (
-		<tr className="hidden w-full lg:flex">
-			{daysOfTheWeek.map((dayOfTheWeek: string, index: number) => (
-				<th
-					className="border border-gray-200 md:flex-1 py-1 font-bold"
-					key={index}
-				>
-					{dayOfTheWeek}
-				</th>
-			))}
-		</tr>
+		<thead>
+			<tr className="hidden w-full lg:flex">
+				{daysOfTheWeek.map((dayOfTheWeek: string, index: number) => (
+					<th
+						className="border border-gray-200 md:flex-1 py-1 font-bold"
+						key={index}
+					>
+						{dayOfTheWeek}
+					</th>
+				))}
+			</tr>
+		</thead>
 	);
 };
 
