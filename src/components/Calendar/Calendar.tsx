@@ -14,11 +14,9 @@ const Calendar = () => {
 	const [date] = useState(new Date());
 	const result = useQuery(ALL_SCREENINGS);
 
-	if (result.loading)
-    return <Loading />;
+	if (result.loading) return <Loading />;
 
-	if (result.error)
-		return <ServerError />;
+	if (result.error) return <ServerError />;
 
 	const monthStart = dateFns.startOfMonth(date);
 	const monthEnd = dateFns.endOfMonth(monthStart);
@@ -26,34 +24,39 @@ const Calendar = () => {
 	const endDate = dateFns.endOfWeek(monthEnd);
 	const month = getMonth();
 	let day = startDate;
-	
+
 	const rows = [];
 	let days = [];
 
 	while (day <= endDate) {
 		for (let i = 0; i < 7; i++) {
 			let screenings = result.data.allScreenings.filter(
-				(screening: Screening) => screening.date.day === Number(getDayOfTheMonth(day))
+				(screening: Screening) =>
+					screening.date.day === Number(getDayOfTheMonth(day))
 			);
-			const morningScreenings = screenings.filter((screening: Screening) => screening.time.toUpperCase().includes("AM"));
-			const eveningScreenings = screenings.filter((screening: Screening) => screening.time.toUpperCase().includes("PM"));
-			eveningScreenings.sort((a: Screening, b: Screening) => Number(a.time.replace(/[^0-9]/g, "")) - Number(b.time.replace(/[^0-9]/g, "")));
+			const morningScreenings = screenings.filter((screening: Screening) =>
+				screening.time.toUpperCase().includes("AM")
+			);
+			const eveningScreenings = screenings.filter((screening: Screening) =>
+				screening.time.toUpperCase().includes("PM")
+			);
+			eveningScreenings.sort(
+				(a: Screening, b: Screening) =>
+					Number(a.time.replace(/[^0-9]/g, "")) -
+					Number(b.time.replace(/[^0-9]/g, ""))
+			);
 			screenings = [...morningScreenings, ...eveningScreenings];
 			days.push(
-				<Day 
-					day={day} 
-					key={day.toDateString()} 
-					screenings={screenings} 
+				<Day
+					day={day}
+					key={day.toDateString()}
+					screenings={screenings}
 					monthStart={monthStart}
 				/>
 			);
 			day = getNextDay(day);
 		}
-		rows.push(
-			<Week key={day.toDateString()}>
-				{days}
-			</Week>
-		);
+		rows.push(<Week key={day.toDateString()}>{days}</Week>);
 		days = [];
 	}
 
@@ -66,9 +69,7 @@ const Calendar = () => {
 				<thead>
 					<CalendarHeader />
 				</thead>
-				<tbody>
-					{rows}
-				</tbody>
+				<tbody>{rows}</tbody>
 			</table>
 		</div>
 	);

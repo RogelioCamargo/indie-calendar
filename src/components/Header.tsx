@@ -11,14 +11,10 @@ const Header = () => {
 			</Link>
 			<nav className="">
 				<Link to="/">
-					<span className="md:text-lg">
-						Calendar
-					</span>
+					<span className="md:text-lg">Calendar</span>
 				</Link>
 				<Link to="/about">
-					<span className="ml-5 md:text-lg">
-						About
-					</span>
+					<span className="ml-5 md:text-lg">About</span>
 				</Link>
 			</nav>
 		</div>

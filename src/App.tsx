@@ -8,8 +8,8 @@ import Footer from "./components/Footer";
 import About from "./components/About";
 
 const App = () => {
-  return (
-    <div className="App">
+	return (
+		<div className="App">
 			<Header />
 			<Routes>
 				<Route path="/" element={<Calendar />} />
@@ -17,8 +17,8 @@ const App = () => {
 				<Route path="about" element={<About />} />
 			</Routes>
 			<Footer />
-    </div>
-  );
+		</div>
+	);
 };
 
 export default App;

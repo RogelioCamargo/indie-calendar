@@ -16,17 +16,30 @@ export const isSameMonth = (day: Date, monthStart: Date): boolean => {
 	return dateFns.isSameMonth(day, monthStart);
 };
 
-export const getClassesForDayContainer = (day: Date, monthStart: Date): string => {
-	return !dateFns.isSameMonth(day, monthStart) ? "bg-gray-100" : 
-					dateFns.isSameDay(day, new Date()) ? "pb-12 bg-red-500 text-white": "";
+export const getClassesForDayContainer = (
+	day: Date,
+	monthStart: Date
+): string => {
+	return !dateFns.isSameMonth(day, monthStart)
+		? "bg-gray-100"
+		: dateFns.isSameDay(day, new Date())
+		? "pb-12 bg-red-500 text-white"
+		: "";
 };
 
 export const getClassesForScreeningPreview = (day: Date): string => {
-	return dateFns.isSameDay(day, new Date()) ? "hover:text-black" : "hover:text-red-500";
+	return dateFns.isSameDay(day, new Date())
+		? "hover:text-black"
+		: "hover:text-red-500";
 };
 
 export const formatDate = (day: string) => {
 	const newDate = new Date();
-	return dateFns.format(newDate, "MMMM") + " " + 
-	day + ", " + dateFns.format(newDate, "yyyy");
+	return (
+		dateFns.format(newDate, "MMMM") +
+		" " +
+		day +
+		", " +
+		dateFns.format(newDate, "yyyy")
+	);
 };
