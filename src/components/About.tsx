@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const About = () => {
+	useEffect(() => {
+		document.title = "About";
+	});
+
 	return (
 		<div className="about-container px-10 flex flex-col justify-center">
 			<h2 className="font-bold">

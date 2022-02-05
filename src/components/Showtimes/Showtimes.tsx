@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { ScreeningFull } from "../../types";
@@ -14,8 +14,11 @@ const Showtimes = () => {
 		variables: { day: Number(params.day) },
 	});
 
-	if (result.loading) return <Loading />;
+	useEffect(() => {
+		document.title = "Showtimes";
+	});
 
+	if (result.loading) return <Loading />;
 	if (result.error) return <ServerError />;
 
 	const screenings = result.data.findScreeningsByDate;
@@ -76,7 +79,7 @@ const Showtimes = () => {
 										</>
 									)}
 								</div>
-						</div>
+							</div>
 						</div>
 					</div>
 				</div>

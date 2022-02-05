@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useQuery } from "@apollo/client";
 import { ALL_SCREENINGS } from "../../graphql/queries";
 import { getMonth } from "./utils";
@@ -10,6 +10,10 @@ import CalendarBody from "./CalendarBody";
 const Calendar = () => {
 	const result = useQuery(ALL_SCREENINGS);
 	const month = getMonth();
+
+	useEffect(() => {
+		document.title = "Calendar";
+	});
 
 	if (result.loading) return <Loading />;
 	if (result.error) return <ServerError />;
