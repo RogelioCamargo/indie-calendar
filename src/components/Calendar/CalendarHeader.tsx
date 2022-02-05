@@ -1,25 +1,29 @@
 import React from "react";
-import { getDayName } from "./utils";
 
-const DayName = ({ name }: { name: string }) => (
-	<div className="border border-gray-200 md:flex-1 py-1 font-bold">
-		{name}
-	</div>
-);
-
-const CalendarHeader = ({ date }: { date: Date}) => {
-	// get days of the week
-	const weekdayNames = [];
-	for (let i = 0; i < 7; i++) {
-		weekdayNames.push(
-			<DayName name={getDayName(date, i)} key={i}/>
-		);
-	}
+const CalendarHeader = () => {
+	const daysOfTheWeek = [
+		"Sunday",
+		"Monday",
+		"Tuesday",
+		"Wednesday",
+		"Thursday",
+		"Friday",
+		"Saturday",
+	];
 
 	return (
-		<div className="hidden w-full lg:flex">
-			{weekdayNames}
-		</div>
+		<thead>
+			<tr className="hidden w-full lg:flex">
+				{daysOfTheWeek.map((dayOfTheWeek: string, index: number) => (
+					<th
+						className="border border-gray-200 md:flex-1 py-1 font-bold"
+						key={index}
+					>
+						{dayOfTheWeek}
+					</th>
+				))}
+			</tr>
+		</thead>
 	);
 };
 
