@@ -40,7 +40,7 @@ const CalendarBody = ({ screenings }: { screenings: Array<Screening> }) => {
 		calendarDays = [];
 	}
 
-	return <tbody className="">{calendarRows}</tbody>;
+	return <tbody>{calendarRows}</tbody>;
 };
 
 export default CalendarBody;
