@@ -28,7 +28,7 @@ const Showtimes = () => {
 			</h2>
 			{screeningsSortedByTime.map((screening: ScreeningFull) => (
 				<div key={screening.id} id={screening.id}>
-					<div className="px-7 mb-7 md:mb-20 md:max-w-3xl md:mx-auto lg:max-w-7xl">
+					<div className="px-7 mb-20 md:max-w-3xl md:mx-auto lg:max-w-7xl">
 						<div className="md:flex">
 							<img
 								className="block w-full h-full bg-gray-300 md:max-w-xs md:mr-5"
