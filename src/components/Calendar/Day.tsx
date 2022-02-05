@@ -42,7 +42,7 @@ const Day = ({
 
 	return (
 		<td
-			className={`border border-gray-200 pt-2 px-3 pb-5 md:flex-1 ${getClassesForDayContainer(
+			className={`border block border-gray-200 pt-2 px-3 pb-5 lg:flex-1 ${getClassesForDayContainer(
 				day,
 				startOfMonth
 			)}`}
