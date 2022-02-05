@@ -8,27 +8,30 @@ import Week from "./Week";
 const CalendarBody = ({ screenings }: { screenings: Array<Screening> }) => {
 	const [date] = useState(new Date());
 
-	const monthStart = dateFns.startOfMonth(date);
-	const monthEnd = dateFns.endOfMonth(monthStart);
-	const startDate = dateFns.startOfWeek(monthStart);
-	const endDate = dateFns.endOfWeek(monthEnd);
+	const startOfMonth = dateFns.startOfMonth(date);
+	const endOfMonth = dateFns.endOfMonth(startOfMonth);
+	const startDate = dateFns.startOfWeek(startOfMonth);
+	const endDate = dateFns.endOfWeek(endOfMonth);
 	let day = startDate;
 
 	const calendarRows = [];
 	let calendarDays = [];
 
 	while (day <= endDate) {
+		// create week rows
 		for (let i = 0; i < 7; i++) {
+			// get screenings of that day
 			const screeningsOfTheDay = screenings.filter(
 				(screening: Screening) =>
 					screening.date.day === Number(getDayOfTheMonth(day))
 			);
+			// get days of that week
 			calendarDays.push(
 				<Day
 					day={day}
 					key={day.toDateString()}
 					screenings={sortScreeningsByTime(screeningsOfTheDay)}
-					monthStart={monthStart}
+					startOfMonth={startOfMonth}
 				/>
 			);
 			day = getNextDay(day);

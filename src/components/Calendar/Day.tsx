@@ -11,11 +11,11 @@ import {
 const Day = ({
 	day,
 	screenings,
-	monthStart,
+	startOfMonth,
 }: {
 	day: Date;
 	screenings: Array<Screening>;
-	monthStart: Date;
+	startOfMonth: Date;
 }) => {
 	const dayOfTheMonth = getDayOfTheMonth(day);
 
@@ -36,18 +36,18 @@ const Day = ({
 		</>
 	);
 
+	const NotDayOfMonth = () => (
+		<span className="block font-bold mb-3">{dayOfTheMonth}</span>
+	);
+
 	return (
 		<td
 			className={`border border-gray-200 pt-2 px-3 pb-5 md:flex-1 ${getClassesForDayContainer(
 				day,
-				monthStart
+				startOfMonth
 			)}`}
 		>
-			{isSameMonth(day, monthStart) ? (
-				<ScreeningList />
-			) : (
-				<span className="block font-bold mb-3">{dayOfTheMonth}</span>
-			)}
+			{isSameMonth(day, startOfMonth) ? <ScreeningList /> : <NotDayOfMonth />}
 		</td>
 	);
 };
