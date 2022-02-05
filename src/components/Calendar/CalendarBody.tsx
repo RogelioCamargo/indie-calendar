@@ -1,57 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import * as dateFns from "date-fns";
-import { getDayOfTheMonth, getNextDay } from "./utils";
+import { getDayOfTheMonth, getNextDay, sortScreeningsByTime } from "./utils";
 import { Screening } from "../../types";
 import Day from "./Day";
 import Week from "./Week";
 
-const CalendarBody = ({ date, screenings }: { date: Date, screenings: Array<Screening> }) => {
+const CalendarBody = ({ screenings }: { screenings: Array<Screening> }) => {
+	const [date] = useState(new Date());
+
 	const monthStart = dateFns.startOfMonth(date);
 	const monthEnd = dateFns.endOfMonth(monthStart);
 	const startDate = dateFns.startOfWeek(monthStart);
 	const endDate = dateFns.endOfWeek(monthEnd);
 	let day = startDate;
 
-	const rows = [];
-	let days = [];
+	const calendarRows = [];
+	let calendarDays = [];
 
 	while (day <= endDate) {
 		for (let i = 0; i < 7; i++) {
-			let screeningsOfTheDay = screenings.filter(
+			const screeningsOfTheDay = screenings.filter(
 				(screening: Screening) =>
 					screening.date.day === Number(getDayOfTheMonth(day))
 			);
-			const morningScreenings = screeningsOfTheDay.filter((screening: Screening) =>
-				screening.time.toUpperCase().includes("AM")
-			);
-			const eveningScreenings = screeningsOfTheDay.filter((screening: Screening) =>
-				screening.time.toUpperCase().includes("PM")
-			);
-			eveningScreenings.sort(
-				(a: Screening, b: Screening) =>
-					Number(a.time.replace(/[^0-9]/g, "")) -
-					Number(b.time.replace(/[^0-9]/g, ""))
-			);
-			screeningsOfTheDay = [...morningScreenings, ...eveningScreenings];
-			days.push(
+			calendarDays.push(
 				<Day
 					day={day}
 					key={day.toDateString()}
-					screenings={screeningsOfTheDay}
+					screenings={sortScreeningsByTime(screeningsOfTheDay)}
 					monthStart={monthStart}
 				/>
 			);
 			day = getNextDay(day);
 		}
-		rows.push(<Week key={day.toDateString()}>{days}</Week>);
-		days = [];
+		calendarRows.push(<Week key={day.toDateString()}>{calendarDays}</Week>);
+		calendarDays = [];
 	}
 
-	return (
-		<tbody>
-			{rows}
-		</tbody>
-	);
+	return <tbody>{calendarRows}</tbody>;
 };
 
 export default CalendarBody;

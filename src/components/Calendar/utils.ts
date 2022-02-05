@@ -1,4 +1,5 @@
 import * as dateFns from "date-fns";
+import { Screening, ScreeningFull } from "../../types";
 
 export const getMonth = (): string => {
 	return dateFns.format(new Date(), "MMMM");
@@ -42,4 +43,24 @@ export const formatDate = (day: string) => {
 		", " +
 		dateFns.format(newDate, "yyyy")
 	);
+};
+
+export const sortScreeningsByTime = (
+	screenings: Array<Screening | ScreeningFull>
+) => {
+	const morningScreenings = screenings.filter(
+		(screening: Screening | ScreeningFull) =>
+			screening.time.toUpperCase().includes("AM")
+	);
+	const eveningScreenings = screenings.filter(
+		(screening: Screening | ScreeningFull) =>
+			screening.time.toUpperCase().includes("PM")
+	);
+	eveningScreenings.sort(
+		(a: Screening | ScreeningFull, b: Screening | ScreeningFull) =>
+			Number(a.time.replace(/[^0-9]/g, "")) -
+			Number(b.time.replace(/[^0-9]/g, ""))
+	);
+
+	return [...morningScreenings, ...eveningScreenings];
 };

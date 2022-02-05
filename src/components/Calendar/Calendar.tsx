@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useQuery } from "@apollo/client";
 import { ALL_SCREENINGS } from "../../graphql/queries";
 import { getMonth } from "./utils";
@@ -8,12 +8,10 @@ import ServerError from "../Error";
 import CalendarBody from "./CalendarBody";
 
 const Calendar = () => {
-	const [date] = useState(new Date());
 	const result = useQuery(ALL_SCREENINGS);
 	const month = getMonth();
 
 	if (result.loading) return <Loading />;
-
 	if (result.error) return <ServerError />;
 
 	return (
@@ -23,7 +21,7 @@ const Calendar = () => {
 			</h2>
 			<table className="border border-gray-200">
 				<CalendarHeader />
-				<CalendarBody date={date} screenings={result.data.allScreenings} />
+				<CalendarBody screenings={result.data.allScreenings} />
 			</table>
 		</div>
 	);
