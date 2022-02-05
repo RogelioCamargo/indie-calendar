@@ -46,18 +46,18 @@ export const formatDate = (day: string) => {
 };
 
 export const sortScreeningsByTime = (
-	screenings: Array<Screening | ScreeningFull>
+	screenings: Array<Screening>
 ) => {
 	const morningScreenings = screenings.filter(
-		(screening: Screening | ScreeningFull) =>
+		(screening: Screening) =>
 			screening.time.toUpperCase().includes("AM")
 	);
 	const eveningScreenings = screenings.filter(
-		(screening: Screening | ScreeningFull) =>
+		(screening: Screening) =>
 			screening.time.toUpperCase().includes("PM")
 	);
 	eveningScreenings.sort(
-		(a: Screening | ScreeningFull, b: Screening | ScreeningFull) =>
+		(a: Screening, b: Screening) =>
 			Number(a.time.replace(/[^0-9]/g, "")) -
 			Number(b.time.replace(/[^0-9]/g, ""))
 	);

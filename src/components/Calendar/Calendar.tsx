@@ -15,11 +15,11 @@ const Calendar = () => {
 	if (result.error) return <ServerError />;
 
 	return (
-		<div className="px-5 -mt-3">
+		<div className="px-5 -mt-3 md:max-w-screen-2xl md:mx-auto">
 			<h2 className="text-xl mb-3 font-bold py-3 bg-white sticky top-0 lg:text-3xl">
 				{month}
 			</h2>
-			<table className="border border-gray-200 md:max-w-screen-2xl mx-auto">
+			<table className="border border-gray-200 md:mx-auto lg:mx-0">
 				<CalendarHeader />
 				<CalendarBody screenings={result.data.allScreenings} />
 			</table>
