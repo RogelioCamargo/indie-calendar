@@ -5,6 +5,13 @@ https://cinema-calendar.herokuapp.com/
 
 A calendar app which lists films from various small and independent movie theaters in Los Angles, CA!
 
+## Setup
+
+```
+npm install
+npm start
+```
+
 Technologies and services: 
 1. Typescript
 2. React
