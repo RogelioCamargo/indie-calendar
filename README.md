@@ -17,3 +17,9 @@ npm start
 3. GraphQL
 4. MongoDB and mongoose
 5. Tailwind CSS
+
+## Screenshots
+<div style="display: flex">
+  <img src="/demo/calendar.png" alt="" style="width: 600px;" >
+  <img src="/demo/screenings.png" alt="" style="width: 600px;">
+</div>
