@@ -11,7 +11,7 @@ npm install
 npm start
 ```
 
-## Technologies and services: 
+## Technologies/Services: 
 1. Typescript
 2. React
 3. GraphQL
