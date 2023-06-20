@@ -1,8 +1,5 @@
 # LAFILM
 
-## Demo
-https://cinema-calendar.herokuapp.com/
-
 A calendar app which lists films from various small and independent movie theaters in Los Angles, CA!
 
 ## Setup
